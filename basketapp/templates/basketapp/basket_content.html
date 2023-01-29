@@ -1,0 +1,47 @@
+{% extends 'mainapp/index.html' %}
+{% load static %}
+
+
+{% block content %}
+{% for i in basket %}
+
+<div>
+    <li>
+        <p class="lead fw-bold fs-1 ">{{i.product.name}}</p>
+        <p class="fs-4">Цена: {{i.product.price}}</p>
+        <div class="quantity_inner">
+            <form id="form_quantity">
+                {% csrf_token %}
+                <button
+                        id="bt_minus" type="submit" class="bt_minus"
+                        data-quantity_minus = '{{ i.quantity }}'
+                        data-product_id = '{{ i.id }}'
+                        data-product_price ={{i.price}}>-
+                </button>
+                <input type="text" class="quantity" value="{{i.quantity}}" data-max-count="20">
+                <button type="submit" class="bt_plus"
+                        data-quantity_plus = '{{ i.quantity }}'
+                        data-product_id = '{{ i.id }}'
+                        data-product_price ={{i.price}}>+
+                </button>
+            </form>
+        </div>
+
+    </li>
+    <div class="counter-reset"></div>
+    <form id='form_delete_product'>
+        {% csrf_token %}
+        <button id='delete_btn' type="submit"
+                data-product_id = '{{ i.id }}'
+                class="ead fw-bold fs-1"
+                ">DELETE
+        </button>
+    </form>
+</div>
+<hr class="featurette-divider">
+
+{% endfor %}
+<div>
+    <p>Итого:</p>
+</div>
+{% endblock %}

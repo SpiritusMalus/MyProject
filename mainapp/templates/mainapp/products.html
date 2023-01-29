@@ -1,0 +1,44 @@
+{% extends 'mainapp/index.html' %}
+{% load static %}
+{% block title %}
+
+    Main page
+
+{% endblock %}
+
+{% block content %}
+
+    {% for i in context %}
+
+        <div class="row featurette" style="margin-top: 5.5em; margin-left: 15px">
+            <div class="col-md-7">
+                <h1 class="featurette-heading ">{{ i.name }}</h1>
+                <p class="fs-4">{{ i.description }}</p>
+                <p class="lead fw-bold fs-1 ">{{ i.price }}</p>
+                <form id='form_buying_product'>
+                    {% csrf_token %}
+                    <button  id='submit_btn' type="submit"
+                             {% for j in users %}
+                             data-user_id = '{{ j.id }}'
+                             {% endfor %}
+                             data-product_id = '{{ i.id }}'
+                             data-name = '{{ i.name }}'
+                             data-price = '{{ i.price }}'
+                             data-description = '{{ i.description }}'
+                             class="ead fw-bold fs-1">Заказать</button>
+                </form>
+
+            </div>
+            <div class="col-md-5">
+                <div>
+                    <img src="{% static i.image %}" width="500" height="500">
+                </div>
+            </div>
+        </div>
+        {% if i.pk == 10 %}
+        {% else %}
+            <hr class="featurette-divider">
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
