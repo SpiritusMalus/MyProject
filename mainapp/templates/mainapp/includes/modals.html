@@ -1,0 +1,113 @@
+<!-- Modal for login-->
+
+<div class="modal fade" id="modal-sing-up" tabindex="-1" aria-labelledby="modal-sing-upLabel" aria-hidden="true"
+     xmlns="http://www.w3.org/1999/html">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-sing-upLabel">Login</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <h5>Username</h5>
+                    <div style="margin-bottom: 25px; margin-top: 10px">{{ AuthUserForm.username }}</div>
+                    <h5>Password</h5>
+                    <div style="margin-bottom: 25px; margin-top: 10px">{{ AuthUserForm.password }}</div>
+                    {% if AuthUserForm.errors %}
+                    <div class="errors"> {{ AuthUserForm.errors }}</div>
+                    {% endif %}
+
+                    <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" value="OK">Login</button>
+                    <a class="text-muted rounded-4" href="{% url 'register' %}">Sign up</a>
+                    <hr class="my-4">
+                    <h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
+                    <!--            GOOGLE ENTER-->
+                    <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4" type="submit">
+                        <a class="bi me-1" width="16" height="16" href="{% url 'social:begin' 'google-oauth2' %}">Login
+                            with Google</a>
+                    </button>
+                    </button>
+                    <!--          <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4" type="submit">-->
+                    <!--            <svg class="btn-github" width="16" height="16"><use href="#github"/></svg>-->
+                    <!--            Sign up with GitHub-->
+                    <!--          </button>-->
+                    <a id="github-button" class="btn btn-block btn-social btn-github">
+                        <i class="fa fa-github"></i> Sign in with Github
+                    </a>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- Modal for Login v.2-->
+
+<!--<div class="modal fade" id="modal-login" tabindex="-1" aria-labelledby="modal-loginLabel" aria-hidden="true">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="modal-loginLabel">Login</h5>-->
+<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--                <form method="post">-->
+<!--                    {% csrf_token %}-->
+<!--          <div class="form-floating mb-3">-->
+<!--            <input type="email" class="form-control rounded-4" id="floatingInput" placeholder="name@example.com">-->
+<!--            <label for="floatingInput">Email address</label>-->
+<!--          </div>-->
+<!--          <div class="form-floating mb-3">-->
+<!--            <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">-->
+<!--            <label for="floatingPassword">Password</label>-->
+<!--          </div>-->
+<!--          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Login</button>-->
+<!--                </form>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--{#-->
+<!--<div class="form-outline mb-4">#}-->
+<!--    {# <input placeholder="Email@example.com" type="email" id="email" class="form-control form-control-lg">#}-->
+<!--    {#-->
+<!--    <div class="form-notch">#}-->
+<!--        {#-->
+<!--        <div class="form-notch-leading" style="width: 9px;"></div>-->
+<!--        #}-->
+<!--        {#-->
+<!--        <div class="form-notch-middle" style="width: 88.8px;"></div>-->
+<!--        #}-->
+<!--        {#-->
+<!--        <div class="form-notch-trailing"></div>-->
+<!--        #}-->
+<!--        {#-->
+<!--    </div>-->
+<!--    #}-->
+<!--    {#-->
+<!--</div>#}-->
+<!--{#-->
+<!--<div class="form-outline mb-4">#}-->
+<!--    {# <input placeholder="password" type="password" id="passwrd" class="form-control form-control-lg">#}-->
+<!--    {#-->
+<!--    <div class="form-notch">#}-->
+<!--        {#-->
+<!--        <div class="form-notch-leading" style="width: 9px;"></div>-->
+<!--        #}-->
+<!--        {#-->
+<!--        <div class="form-notch-middle" style="width: 64.8px;"></div>-->
+<!--        #}-->
+<!--        {#-->
+<!--        <div class="form-notch-trailing"></div>-->
+<!--        #}-->
+<!--        {#-->
+<!--    </div>-->
+<!--    #}-->
+<!--    {#-->
+<!--</div>#}-->
