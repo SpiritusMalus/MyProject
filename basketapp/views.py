@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
-
+import re
 from basketapp.models import Basket
 from mainapp.models import Product, User
 from django.views.generic import ListView, CreateView
@@ -9,12 +9,17 @@ from django.views.generic import ListView, CreateView
 def basket(request):
     basket = Basket.objects.all()
     quantity = 0
+    basket_total_price = 0
     for i in basket:
         quantity += i.quantity
+        price_int = int(re.sub(r"[а-я\s+\.]", "", i.product.price)) * i.quantity
+        basket_total_price += price_int
+
     context = {
         "context": Product.objects.all(),
         'basket': basket,
         'quantity': quantity,
+        'basket_total_price': basket_total_price,
     }
 
     return render(request, 'basketapp/basket.html', context)
@@ -60,18 +65,17 @@ def basket_remove(request):
 
 def basket_quantity(request):
     pk = request.POST['product_id']
-
-    if request.POST['quantity_minus']:
+    if 'quantity_minus' in request.POST:
         quantity_minus = request.POST['quantity_minus']
         basket_record = get_object_or_404(Basket, pk=pk)
         basket_record.quantity -= 1
         if basket_record.quantity == 0:
             basket_record.delete()
         basket_record.save()
-    elif request.POST['quantity_plus']:
+    else:
         quantity_plus = request.POST['quantity_plus']
         basket_record = get_object_or_404(Basket, pk=pk)
         basket_record.quantity += 1
-    basket_total_price = basket_record.quantity * basket_record.price
-    print(basket_total_price)
+        basket_record.save()
+
     return render(request, 'basketapp/basket.html', locals())

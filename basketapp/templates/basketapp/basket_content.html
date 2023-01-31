@@ -9,6 +9,7 @@
     <li>
         <p class="lead fw-bold fs-1 ">{{i.product.name}}</p>
         <p class="fs-4">Цена: {{i.product.price}}</p>
+        <img src="{% static i.product.image %}" width="300" height="300">
         <div class="quantity_inner">
             <form id="form_quantity">
                 {% csrf_token %}
@@ -16,19 +17,20 @@
                         id="bt_minus" type="submit" class="bt_minus"
                         data-quantity_minus = '{{ i.quantity }}'
                         data-product_id = '{{ i.id }}'
-                        data-product_price ={{i.price}}>-
+                        data-product_price ={{ i.product.price }}>-
                 </button>
                 <input type="text" class="quantity" value="{{i.quantity}}" data-max-count="20">
-                <button type="submit" class="bt_plus"
+                <button
+                        id='bt_plus' type="submit" class="bt_plus"
                         data-quantity_plus = '{{ i.quantity }}'
                         data-product_id = '{{ i.id }}'
-                        data-product_price ={{i.price}}>+
+                        data-product_price ={{ i.product.price }}>+
                 </button>
             </form>
         </div>
 
     </li>
-    <div class="counter-reset"></div>
+
     <form id='form_delete_product'>
         {% csrf_token %}
         <button id='delete_btn' type="submit"
@@ -42,6 +44,10 @@
 
 {% endfor %}
 <div>
-    <p>Итого:</p>
+    <p class="lead fw-bold fs-1">Итого:{{basket_total_price}} руб.</p>
 </div>
+<button type="submit" class="lead fw-bold fs-1">
+    <a id="basket" href="{% url 'main' %}">Покупаю! </a>
+</button>
+
 {% endblock %}
